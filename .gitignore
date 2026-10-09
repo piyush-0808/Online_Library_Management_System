@@ -1,0 +1,18 @@
+# NetBeans / Ant generated output
+/build/
+/dist/
+/nbproject/private/
+
+# Java build artifacts
+*.class
+*.log
+
+# Local editor and OS metadata
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+src/db.properties
+
+/Library-Management-System-Submission.zip
