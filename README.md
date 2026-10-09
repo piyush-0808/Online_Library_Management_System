@@ -1,4 +1,4 @@
-# Library Management System
+﻿# Library Management System
 
 A Java desktop application for managing a library catalogue, members, circulation, reservations, fines, and reports. It uses Swing/AWT, JDBC, and MySQL, and is organized as a NetBeans Java-with-Ant project.
 
@@ -7,7 +7,7 @@ A Java desktop application for managing a library catalogue, members, circulatio
 - Librarian sign-in, dashboard statistics, book and member administration, issue/return, reservations, fine management, reports, profile/password tools, and logout.
 - Student and faculty registration with librarian approval; members can search the catalogue and view their own borrowed books, history, reservations, and fines.
 - Member-specific borrowing limits, loan periods, and overdue fine rates.
-- Reference books cannot be issued. A member cannot hold two active issues of the same book, and borrowing is restricted for pending/blocked members or members whose unpaid fines exceed ₹100.
+- Reference books cannot be issued. A member cannot hold two active issues of the same book, and borrowing is restricted for pending/blocked members or members whose unpaid fines exceed â‚¹100.
 - FIFO reservation queue. On return, the oldest eligible waiting member receives a `READY` hold; cancellation or claiming a hold updates the queue and availability.
 - Searchable reports and printable report tables.
 - JDBC work is performed through DAOs and services; Swing screens use `SwingWorker` for background operations. Issue/return use per-book JVM locks and MySQL row locks.
@@ -36,33 +36,33 @@ UI classes delegate business logic to services. DAOs own SQL and row mapping; `D
 
 ```text
 Library-Management-System/
-├── build.xml                         Ant targets and project customizations
-├── manifest.mf                       Executable JAR manifest
-├── library_schema.sql                Database, tables, seed account, DB user
-├── .gitignore
-├── README.md
-├── lib/
-│   └── mysql-connector-j.jar          JDBC driver
-├── nbproject/
-│   ├── build-impl.xml                 NetBeans Ant implementation
-│   ├── genfiles.properties
-│   ├── project.properties
-│   └── project.xml
-└── src/
-    ├── db.properties                 Local JDBC settings
-    └── library/management/system/
-        ├── dao/                       Book, member, user, issue, fine,
-        │                              reservation, and report DAOs
-        ├── db/                        DBConnection, DatabaseTransaction,
-        │                              SchemaMigrator
-        ├── exception/                 Checked library exceptions
-        ├── item/                      LibraryItem hierarchy and item factory
-        ├── member/                    Person/member hierarchy and factory
-        ├── model/                     Domain objects and enums
-        ├── service/                   Authentication, circulation, rules,
-        │                              reports, reservations, scheduled work
-        ├── ui/                        Swing screens and shared frames
-        └── util/                      Validation, password, date, ID,
+â”œâ”€â”€ build.xml                         Ant targets and project customizations
+â”œâ”€â”€ manifest.mf                       Executable JAR manifest
+â”œâ”€â”€ library_schema.sql                Database, tables, seed account, DB user
+â”œâ”€â”€ .gitignore
+â”œâ”€â”€ README.md
+â”œâ”€â”€ lib/
+â”‚   â””â”€â”€ mysql-connector-j.jar          JDBC driver
+â”œâ”€â”€ nbproject/
+â”‚   â”œâ”€â”€ build-impl.xml                 NetBeans Ant implementation
+â”‚   â”œâ”€â”€ genfiles.properties
+â”‚   â”œâ”€â”€ project.properties
+â”‚   â””â”€â”€ project.xml
+â””â”€â”€ src/
+    â”œâ”€â”€ db.properties                 Local JDBC settings
+    â””â”€â”€ library/management/system/
+        â”œâ”€â”€ dao/                       Book, member, user, issue, fine,
+        â”‚                              reservation, and report DAOs
+        â”œâ”€â”€ db/                        DBConnection, DatabaseTransaction,
+        â”‚                              SchemaMigrator
+        â”œâ”€â”€ exception/                 Checked library exceptions
+        â”œâ”€â”€ item/                      LibraryItem hierarchy and item factory
+        â”œâ”€â”€ member/                    Person/member hierarchy and factory
+        â”œâ”€â”€ model/                     Domain objects and enums
+        â”œâ”€â”€ service/                   Authentication, circulation, rules,
+        â”‚                              reports, reservations, scheduled work
+        â”œâ”€â”€ ui/                        Swing screens and shared frames
+        â””â”€â”€ util/                      Validation, password, date, ID,
                                        background-task, and table helpers
 ```
 
@@ -95,7 +95,7 @@ The project file `src/db.properties` currently contains these local defaults:
 ```properties
 db.url=jdbc:mysql://localhost:3306/library_db?useSSL=false&allowPublicKeyRetrieval=true
 db.user=libuser
-db.password=lib123
+db.password=YOUR_DB_PASSWORD
 ```
 
 Change these values if your MySQL setup differs. Keep database credentials out of Java source. Ant copies this file to the runtime classpath during compilation. The supplied account and password are development defaults; use suitable credentials for any non-local deployment.
@@ -126,10 +126,10 @@ The SQL seed documents and inserts the default librarian account **admin / admin
 
 | Member type | Maximum active issues | Default loan period | Fine per overdue day |
 |---|---:|---:|---:|
-| Student | 3 | 14 days | ₹5 |
-| Faculty | 10 | 30 days | ₹2 |
+| Student | 3 | 14 days | â‚¹5 |
+| Faculty | 10 | 30 days | â‚¹2 |
 
-The issue service also accepts a requested loan duration where provided by its caller. Other implemented rules include: reference books are not issuable; pending or blocked members cannot borrow or reserve; unpaid fines above ₹100 block borrowing; a member cannot issue the same title twice at once; reservations are for unavailable copies; and available-copy changes are protected by transactions and database constraints.
+The issue service also accepts a requested loan duration where provided by its caller. Other implemented rules include: reference books are not issuable; pending or blocked members cannot borrow or reserve; unpaid fines above â‚¹100 block borrowing; a member cannot issue the same title twice at once; reservations are for unavailable copies; and available-copy changes are protected by transactions and database constraints.
 
 ## Data model and security
 
@@ -199,3 +199,4 @@ The schema uses primary/foreign keys, unique constraints and indexes, and checks
 | UI, validation and reports | `ui/UITheme.java`, `ui/BaseFrame.java`, `ui/ReportFrame.java`, `util/Validator.java`, `util/MessageUtil.java`. |
 | Code quality and testing | Checked exceptions under `exception/`; no automated test sources are currently included. Build/test status is stated above. |
 | Delivery files and run steps | This README, `.gitignore`, `src/db.properties`, `library_schema.sql`, `lib/mysql-connector-j.jar`, and NetBeans/Ant files listed above. |
+
